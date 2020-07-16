@@ -155,7 +155,10 @@ export const exposeAsyncModules = async (modules: ExposedModuleConfig[]): Promis
       } as CompleteExposedModuleConfig)
   );
 
-  completeModules.forEach(({ url, value }) => SystemJS.set(url, value));
+  completeModules.forEach(({ url, value }) => {
+    process.stdout.write(url, value);
+    SystemJS.set(url, value);
+   });
 
   return {
     importMap: script,
